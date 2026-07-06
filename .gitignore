@@ -3,3 +3,5 @@ __pycache__
 *.pyc
 reports
 seen.json
+last_cmd_id.txt
+last_push.txt

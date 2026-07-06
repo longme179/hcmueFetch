@@ -79,6 +79,59 @@ python main.py add "Tên nguồn" "https://example.com/news"
 python main.py remove "Tên nguồn"
 python main.py list
  ```
+
+ ## Cài đặt Discord Bot (Tự động chạy nền)
+ 
+ Script bot nằm trong thư mục `discord_bot/`. Nó không tốn RAM khi chờ đợi, chỉ "wake-up" mỗi 5 phút để kiểm tra lệnh `!fetch` hoặc tự động đẩy tin tức mỗi 12h thông qua `systemd`.
+ 
+ ### 1. Thiết lập Bot Discord
+ Vào [Discord Developer Portal](https://discord.com/developers/applications) tạo App mới. Copy **Bot Token** và bật **Message Content Intent** (trong tab Bot). Mời bot vào server với quyền `Read Messages` và `Send Messages`. Lấy **Channel ID** (bật Developer Mode trong Discord -> right-click channel -> Copy ID).
+ 
+ ### 2. Tạo file cấu hình Systemd
+ Tạo 2 file sau trong thư mục `~/.config/systemd/user/` (tạo thư mục này nếu chưa có). Thay `/path/to/hcmueFetch` bằng đường dẫn tuyệt đối đến dự án của bạn.
+ 
+ **File 1: `hcmue-discord.service`**
+ ```ini
+ [Unit]
+ Description=HCMUE Discord Push Bot
+ 
+ [Service]
+ Type=oneshot
+ WorkingDirectory=/path/to/hcmueFetch
+ Environment="DISCORD_BOT_TOKEN=PASTE_TOKEN_HERE"
+ Environment="DISCORD_CHANNEL_ID=PASTE_CHANNEL_ID_HERE"
+ ExecStart=/path/to/hcmueFetch/venv/bin/python /path/to/hcmueFetch/discord_bot/discord_push.py
+ ```
+ 
+ **File 2: `hcmue-discord.timer`**
+ ```ini
+ [Unit]
+ Description=Run HCMUE Discord Poller every 5 minutes
+ 
+ [Timer]
+ OnBootSec=1min
+ OnUnitActiveSec=5min
+ Unit=hcmue-discord.service
+ 
+ [Install]
+ WantedBy=timers.target
+ ```
+ 
+ ### 3. Kích hoạt
+ Chạy các lệnh sau trong terminal:
+ ```bash
+ mkdir -p ~/.config/systemd/user
+ cp discord_bot/hcmue-discord.* ~/.config/systemd/user/
+ systemctl --user daemon-reload
+ systemctl --user enable --now hcmue-discord.timer
+ ```
+ 
+ ### 4. Sử dụng & Kiểm tra
+ - Gõ `!fetch` vào kênh Discord (có bot) để nhận ngay 3 bài mới nhất của từng nguồn.
+ - Xem log nếu bot không hoạt động: `journalctl --user -u hcmue-discord.service -e`
+
+
+ 
 Đóng góp (Contributions)
 
 Dự án này được phát triển với sự hỗ trợ kỹ thuật toàn diện từ GLM-5.2 và Claude.
