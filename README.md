@@ -29,8 +29,9 @@ Trên các distro Arch-based, bắt buộc phải dùng môi trường ảo (ven
 # 1. Clone repository
 git clone https://github.com/longme179/hcmueFetch.git
 cd hcmueFetch
+python -m venv venv
 # 2. Tạo và kích hoạt venv
-python -m venv venvsource venv/bin/activate  
+source venv/bin/activate  
 # Nếu dùng fish shell: 
 source venv/bin/activate.fish
 # 3. Cài đặt dependencies
