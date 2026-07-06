@@ -1,0 +1,8 @@
+requests>=2.28
+beautifulsoup4>=4.11
+lxml>=4.9
+python-dateutil>=2.8
+feedparser>=6.0
+# Tuỳ chọn (cho trang Wix cần JS-render):
+# playwright>=1.40
+# Sau khi cài: playwright install chromium

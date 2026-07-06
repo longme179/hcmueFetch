@@ -1,0 +1,21 @@
+{
+  "sources": [
+    {
+      "name": "Khoa Anh - HCMUE",
+      "url": "https://khoaanh.hcmue.edu.vn/thongbao"
+    },
+    {
+      "name": "HCMUE - Dao tao Dai hoc",
+      "url": "https://hcmue.edu.vn/vi/dao-tao/dai-hoc",
+      "pagination": {
+        "param": "start",
+        "step": 8,
+        "max_pages": 10
+      }
+    },
+    {
+      "name": "HCMUE NEWS",
+      "url": "https://hcmue.edu.vn/en/news-events"
+    }
+  ]
+}
