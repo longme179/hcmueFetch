@@ -1,26 +1,30 @@
 HCMUE News Fetcher
 
 Ứng dụng desktop (GUI) và dòng lệnh (CLI) giúp sinh viên tự động thu thập tin tức, thông báo mới nhất từ nhiều trang web của trường đại học. Chương trình lọc Top N bài mới nhất, hỗ trợ phân trang, multiple date formats, và trích xuất đoạn trích (excerpt) mà không cần API.
-Tính năng chính
 
-    Top N bài mới nhất: Lấy N bài mới nhất tính từ thời điểm chạy (mặc định 10), dựa trên ngày thật đã parse (không bị lừa bởi thứ tự hiển thị hay bài được pin).
-    Đa nguồn (Multi-source): Dễ dàng thêm/xóa nguồn qua file sources.json hoặc trực tiếp trên GUI.
-    Chiến lược scrape thông minh:
-        Dò RSS/Atom feed (ổn định nhất).
-        Dùng CSS Selectors nếu người dùng tự khai báo.
-        Dùng Heuristic (tìm thẻ <a> và chuỗi ngày tháng gần đó).
-        Fallback sang Playwright (headless browser) nếu trang cần JavaScript để render (ví dụ: Wix).
-    Xử lý ngày tháng phức tạp: Hiểu ISO 8601, dd/mm/yyyy, tên tháng tiếng Anh (có/không năm, tự lùi năm nếu ra tương lai), và dạng tương đối ("2 days ago", "2 ngày trước").
-    Tránh trùng lặp: Lưu trạng thái "đã xem" vào seen.json, chỉ lấy excerpt cho bài mới để tiết kiệm băng thông.
-    Giao diện đồ hoạ (Tkinter): Chạy nền bằng threading không bị treo UI, double-click hoặc click nút [Link] để mở trình duyệt.
-    Thân thiện với Server: Tự kiểm tra robots.txt, delay 1-2s giữa các request, có User-Agent riêng.
+Tính năng chính
+Top N bài mới nhất: Lấy N bài mới nhất tính từ thời điểm chạy (mặc định 10), dựa trên ngày thật đã parse (không bị lừa bởi thứ tự hiển thị hay bài được pin).
+Đa nguồn (Multi-source): Dễ dàng thêm/xóa nguồn qua file sources.json hoặc trực tiếp trên GUI.
+
+Chiến lược scrape thông minh:
+    Dò RSS/Atom feed (ổn định nhất).
+    Dùng CSS Selectors nếu người dùng tự khai báo.
+    Dùng Heuristic (tìm thẻ <a> và chuỗi ngày tháng gần đó).
+    Fallback sang Playwright (headless browser) nếu trang cần JavaScript để render (ví dụ: Wix).
+    
+Xử lý ngày tháng phức tạp: Hiểu ISO 8601, dd/mm/yyyy, tên tháng tiếng Anh (có/không năm, tự lùi năm nếu ra tương lai), và dạng tương đối ("2 days ago", "2 ngày trước").
+
+Tránh trùng lặp: Lưu trạng thái "đã xem" vào seen.json, chỉ lấy excerpt cho bài mới để tiết kiệm băng thông.
+
+Giao diện đồ hoạ (Tkinter): Chạy nền bằng threading không bị treo UI, double-click hoặc click nút [Link] để mở trình duyệt.
+
+Thân thiện với Server: Tự kiểm tra robots.txt, delay 1-2s giữa các request, có User-Agent riêng.
 
 Yêu cầu hệ thống
-
-    Python 3.10+
-    Linux
-    Windows
-    Gói tk cho GUI (Trên Arch: sudo pacman -S tk)
+Python 3.10+
+Linux
+Windows
+Gói tk cho GUI (Trên Arch: sudo pacman -S tk)
 
 Cài đặt
 
@@ -29,8 +33,9 @@ Trên các distro Arch-based, bắt buộc phải dùng môi trường ảo (ven
 # 1. Clone repository
 git clone https://github.com/longme179/hcmueFetch.git
 cd hcmueFetch
+python -m venv venv
 # 2. Tạo và kích hoạt venv
-python -m venv venvsource venv/bin/activate  
+source venv/bin/activate  
 # Nếu dùng fish shell: 
 source venv/bin/activate.fish
 # 3. Cài đặt dependencies
