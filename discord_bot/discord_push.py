@@ -55,7 +55,7 @@ def send_discord(items, forced=False):
         content += f"\n**[{source_name}]**\n"
         for it in group:
             # it.date_str() returns "dd/mm/yyyy hh:mm" or "(không rõ ngày)"
-            line = f"- `{it.date_str()}` [{it.title}]({it.link})\n"
+            line = f"- `{it.date_str()}` [{it.title}](<{it.link}>)\n"
             if len(content) + len(line) > 1900:
                 discord_api(
                     "POST", f"/channels/{CHANNEL_ID}/messages", {"content": content}
