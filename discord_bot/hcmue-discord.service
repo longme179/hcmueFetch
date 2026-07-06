@@ -1,0 +1,10 @@
+[Unit]
+Description=HCMUE Discord Push Bot
+
+[Service]
+Type=oneshot
+# Thay đổi đường dẫn này cho đúng với máy bạn
+WorkingDirectory=/home/longme/hcmueFetch
+# Đặt Webhook URL của bạn vào đây, hoặc bỏ dòng này nếu đã hardcode trong script
+Environment="DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/1523770774194753630/uIVbWHju9j8uloJx9g5XM7MPcG80dB6i2ekcNaTYhs7Bjyh8ehB5oPy49uoaOBoX0ASe"
+ExecStart=/home/longme/hcmueFetch/venv/bin/python /home/longme/hcmueFetch/discord_bot/discord_push.py

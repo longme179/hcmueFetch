@@ -1,0 +1,10 @@
+[Unit]
+Description=Run HCMUE Discord Push every 12 hours
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=4h
+Unit=hcmue-discord.service
+
+[Install]
+WantedBy=timers.target
